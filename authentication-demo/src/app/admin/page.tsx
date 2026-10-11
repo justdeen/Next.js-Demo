@@ -1,8 +1,9 @@
 import { auth, clerkClient } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { removeRole, setRole } from "./actions";
 
-export default async function AdminPage() {
+async function AdminContent() {
     const { userId, sessionClaims } = await auth();
 
     const client = await clerkClient();
@@ -78,5 +79,13 @@ export default async function AdminPage() {
         );
       })}
     </>
+  );
+}
+
+export default function AdminPage() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <AdminContent />
+    </Suspense>
   );
 }
