@@ -1,9 +1,12 @@
 import { SignIn } from "@clerk/nextjs";
+import { Suspense } from "react";
 
 export default function SignInPage() {
   return (
-    <div className="flex justify-center items-center py-8">
-      <SignIn />
-    </div>
+    <Suspense fallback={<p>Loading...</p>}>
+      <div className="flex justify-center items-center py-8">
+        <SignIn />
+      </div>
+    </Suspense>
   );
 }
